@@ -1,0 +1,76 @@
+﻿@model List<Empleado>
+
+@{
+    Departamento dept = ViewData["Departamento"] as Departamento;
+}
+
+<h1>Departamento: @dept.Nombre</h1>
+
+<a class="nav-link" asp-controller="Home" asp-action="Index">Volver</a>
+
+@if (dept != null)
+{
+    <div class="mt-3">
+        <div class="p-3 mb-2" style="background-color: lightcoral;">
+            <strong>Id Departamento:</strong> @dept.IdDepartamento
+        </div>
+        <div class="p-3 mb-2" style="background-color: lightblue;">
+            <strong>Nombre:</strong> @dept.Nombre
+        </div>
+        <div class="p-3 mb-2" style="background-color: lightblue;">
+            <strong>Localidad:</strong> @dept.Localidad
+        </div>
+    </div>
+}
+
+<div>
+    <a class="btn btn-outline-primary" asp-controller="Paginacion"
+        asp-action="DepartamentoDetails"
+        asp-route-posicion="1">
+        Primero
+    </a>
+    <a class="btn btn-outline-primary" asp-controller="Paginacion"
+        asp-action="DepartamentoDetails"
+        asp-route-posicion="@ViewData["ANTERIOR"]">
+        Anterior
+    </a>
+    <a class="btn btn-outline-primary" asp-controller="Paginacion"
+        asp-action="DepartamentoDetails"
+        asp-route-posicion="@ViewData["SIGUIENTE"]">
+        Siguiente
+    </a>
+    <a class="btn btn-outline-primary" asp-controller="Paginacion"
+        asp-action="DepartamentoDetails"
+        asp-route-posicion="@ViewData["ULTIMO"]">
+        Ultimo
+    </a>
+</div>
+
+
+@* EMPLEADOS *@
+
+<h3 class="mt-4">
+    Mostrando página @ViewData["POSICION"] de @ViewData["ULTIMO"] 
+</h3>
+
+@foreach (Empleado empleado in Model)
+{
+    <ul class="list-group mb-3">
+        <li class="list-group-item" style="background-color: lightblue;">
+            <strong>Empleado: @empleado.Apellido</strong>
+        </li>
+        <li class="list-group-item" style="background-color: lightblue;">
+            <strong>ID:</strong> @empleado.IdEmpleado
+        </li>
+        <li class="list-group-item" style="background-color: lightblue;">
+            <strong>Apellido:</strong> @empleado.Apellido
+        </li>
+        <li class="list-group-item" style="background-color: lightblue;">
+            <strong>Oficio:</strong> @empleado.Oficio
+        </li>
+        <li class="list-group-item" style="background-color: lightblue;">
+            <strong>Salario:</strong> @empleado.Salario
+        </li>
+    </ul>
+}
+
